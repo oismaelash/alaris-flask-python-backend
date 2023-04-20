@@ -35,12 +35,8 @@ class PlanController():
         return mydict.toJson()
 
     def update(self, id, payload):
-        try:
-            self.services.update(id, payload)
-            return jsonify(payload)
-        except Exception as error:
-            print(error)
-            return error
+        self.services.update(id, payload)
+        return jsonify(payload)
 
     def delete(self, id):
         self.services.delete(id)
