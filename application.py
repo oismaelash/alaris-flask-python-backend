@@ -2,13 +2,13 @@ from flask import Flask, request
 from order import OrderController
 from plan import PlanController
 
-app = Flask(__name__)
+application = Flask(__name__)
 
-@app.route('/', methods=['GET'])
+@application.route('/', methods=['GET'])
 def index():
     return 'API Works! v1.0.0'
 
-@app.route('/order', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@application.route('/order', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def order_controller_api():
     method = request.method
     order_controller = OrderController()
@@ -28,7 +28,7 @@ def order_controller_api():
         return order_controller.delete(id)
 
 
-@app.route('/plan', methods=['GET', 'POST', 'PUT', 'DELETE'])
+@application.route('/plan', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def plan_controller_api():
     method = request.method
     plan_controller = PlanController()
@@ -48,4 +48,4 @@ def plan_controller_api():
         return plan_controller.delete(id)
 
 
-app.run()
+application.run()
