@@ -51,5 +51,5 @@ def plan_controller_api():
         id = request.args.get('id')
         return plan_controller.delete(id)
 
-
-application.run()
+if __name__ == "__main__":
+    application.run()
