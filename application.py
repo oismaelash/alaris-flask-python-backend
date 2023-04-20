@@ -4,6 +4,9 @@ from plan import PlanController
 
 app = Flask(__name__)
 
+@app.route('/', methods=['GET'])
+def index():
+    return 'API Works! v1.0.0'
 
 @app.route('/order', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def order_controller_api():
