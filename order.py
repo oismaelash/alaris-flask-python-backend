@@ -29,7 +29,7 @@ class OrderController():
 
         for item in items:
             mydict.add(item[0], ({"id": item[0], "name": item[1],
-                                  "email": item[2], "phone": item[3], "status": item[4]}))
+                                  "email": item[2], "phone": item[3], "status": item[4], "plan": item[5]}))
 
         return mydict.toJson()
 
@@ -46,8 +46,9 @@ class OrderServices():
 
     def create(self, payload):
         mycursor = mydb.cursor()
-        sql = "INSERT INTO alaris.order (name, email, phone, status) VALUES(%s, %s, %s, 'IN PROGRESS');"
-        values = (payload['name'], payload['email'], payload['phone'])
+        sql = "INSERT INTO alaris.order (name, email, phone, status, plan) VALUES(%s, %s, %s, 'IN PROGRESS', %s);"
+        values = (payload['name'], payload['email'],
+                  payload['phone'], payload['plan'])
         mycursor.execute(sql, values)
         mydb.commit()
 
@@ -60,9 +61,9 @@ class OrderServices():
         print(payload)
 
         mycursor = mydb.cursor()
-        sql = "UPDATE alaris.order SET name=%s, email=%s, phone=%s, status=%s WHERE id=%s;"
+        sql = "UPDATE alaris.order SET name=%s, email=%s, phone=%s, status=%s, plan=%s WHERE id=%s;"
         val = (payload['name'], payload['email'],
-               payload['phone'], payload['status'], id)
+               payload['phone'], payload['status'], payload['plan'], id)
         mycursor.execute(sql, val)
         mydb.commit()
 
